@@ -108,7 +108,7 @@ const handleSubmit = async(e) => {
 
     messageDiv.innerHTML = "something went wrong";
 
-    alert(err);
+    // alert(err);
   }
 }
 

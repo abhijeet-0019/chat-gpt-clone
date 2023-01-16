@@ -5,8 +5,6 @@ import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
 
-console.log(process.env.OPENAI_API_KEY);
-
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -31,7 +29,7 @@ app.post('/', async (req, res) => {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
-            temperature: 0,     // the high risk it takes
+            temperature: 0.5,     // the high risk it takes
             max_tokens: 3000,   // 3000 word response
             top_p: 1,
             frequency_penalty: 0.5,   // no similar response
