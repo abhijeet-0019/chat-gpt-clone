@@ -8,7 +8,6 @@ let loadInterval;
 
 //repeat the three dots animation until we get the result
 function loader(element){
-  console.log("---- loader is runnning ----")
   element.textContent = "";
   loadInterval = setInterval(()=>{
     element.textContent += ".";
@@ -47,8 +46,8 @@ function chatStripe(isAi, value, uniqueId){
   return (
     `
       <div class="wrapper ${isAi && 'ai'}">
-        <div>
-          <div>
+        <div class="chat">
+          <div class="profile">
             <img
               src="${isAi ? bot : user}"
               alt="${isAi ? 'bot' : 'user'}"
@@ -63,26 +62,54 @@ function chatStripe(isAi, value, uniqueId){
 
 //handle Submit
 const handleSubmit = async(e) => {
-  console.log("---- handling the submit request ----")
+  
   e.preventDefault()
 
   const data = new FormData(form);
-  console.log("-----1")
+  
   //user's chat stripe
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
-  console.log("-----1.1")
+  
   form.reset();
-  console.log("-----2")
+  
   //bot's chatstript
   const uniqueId = generateUniqueID();
   chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
-  console.log("-----3")
+  
   //as the user types, keep scrolling down
   chatContainer.scrollTop = chatContainer.scrollHeight;
-  console.log("-----4")
+  
   const messageDiv = document.getElementById(uniqueId);
-  console.log("-----5")
+
   loader(messageDiv);
+
+  //fetch data from server -> bot's response
+
+  const response = await fetch('http://localhost:5000', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      prompt: data.get('prompt')
+    })
+  })
+
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = '';
+
+  if(response.ok){
+    const data = await  response.json();
+    const parsedData = data.bot.trim();
+
+    typeText(messageDiv, parsedData);
+  }else{
+    const err = await response.text();
+
+    messageDiv.innerHTML = "something went wrong";
+
+    alert(err);
+  }
 }
 
 form.addEventListener('submit', handleSubmit)
