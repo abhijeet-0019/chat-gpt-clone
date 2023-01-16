@@ -21,7 +21,7 @@ This project showcases the potential of combining these two technologies to crea
 Javascript, React, Python, C++, Arduino, ...
 
 
-## Screenshots
+## Snap
 
-![Snap](https://drive.google.com/file/d/1UvbRM5w1W04WAUzlYOdRlJmWq1Be3aQ8/view?usp=share_link)
+![sanp](https://github.com/abhijeet-0019/OpenAI_ChatGPT/blob/master/screeshot_openai.png)
 
