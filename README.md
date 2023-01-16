@@ -18,7 +18,7 @@ This project showcases the potential of combining these two technologies to crea
  - [@adrianhajdin](https://github.com/adrianhajdin/)
 
 ## 🛠 Skills
-Javascript, React, Python, C++, Arduino, ...
+Javascript, Node
 
 
 ## Snap
