@@ -1,4 +1,3 @@
-
 # ChatGPT Clone 
 
 ChatGPT Clone is a model/clone of the original ChatGPT. This project utilizes the power of OpenAI's language model in combination with JavaScript to create a dynamic and interactive user experience.
